@@ -263,12 +263,16 @@ $( document ).ready(function() {
             if(scrolled > height_end_block-85) {
                 if(marker) count();
             }
-            if(scrolled + $(window).height() > $(".evolution-buisness__monitor-block").outerHeight(true) && WindowWidth < 577) {
-                $(".evolution-buisness__monitor-block").children(".evolution-buisness__text").addClass("evolution-buisness__text_active");
+            if(scrolled + $(window).height() > $(".evolution-buisness__monitor-block").outerHeight() + $(".evolution-buisness__monitor-block").offset().top && WindowWidth < 577) {
+                setTimeout(() => {
+                    $(".evolution-buisness__monitor-block").children(".evolution-buisness__text").addClass("evolution-buisness__text_active");
+                }, 1200);
             }
         });
 
     //          -----------------------------------------------Uslugi-------------------------------------------------
+    // Функция ниже приравнивает click = touch, чтобы работал слайдер (для мобильных устройств)
+    !function(a){function f(a,b){if(!(a.originalEvent.touches.length>1)){a.preventDefault();var c=a.originalEvent.changedTouches[0],d=document.createEvent("MouseEvents");d.initMouseEvent(b,!0,!0,window,1,c.screenX,c.screenY,c.clientX,c.clientY,!1,!1,!1,!1,0,null),a.target.dispatchEvent(d)}}if(a.support.touch="ontouchend"in document,a.support.touch){var e,b=a.ui.mouse.prototype,c=b._mouseInit,d=b._mouseDestroy;b._touchStart=function(a){var b=this;!e&&b._mouseCapture(a.originalEvent.changedTouches[0])&&(e=!0,b._touchMoved=!1,f(a,"mouseover"),f(a,"mousemove"),f(a,"mousedown"))},b._touchMove=function(a){e&&(this._touchMoved=!0,f(a,"mousemove"))},b._touchEnd=function(a){e&&(f(a,"mouseup"),f(a,"mouseout"),this._touchMoved||f(a,"click"),e=!1)},b._mouseInit=function(){var b=this;b.element.bind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),c.call(b)},b._mouseDestroy=function(){var b=this;b.element.unbind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),d.call(b)}}}(jQuery);
 
     // $.preloadImages("../img/home/1.jpg", "../img/home/2.jpg", "../img/home/3.png", "../img/home/4.png", "../img/uslugi/realization/Slice_1.png");  //указываем путь к изображению, которое нужно подгрузить
     let currentIndent = $(".uslugi-home__slider").offset().left;
@@ -294,6 +298,8 @@ $( document ).ready(function() {
     }
 
     $(window).resize(function() {   
+        let vh = window.innerHeight * 0.01;                            // Код для шапки мобильных
+        document.documentElement.style.setProperty('--vh', `${vh}px`); // браузеров
         RightContainment = $(window).width() / 2;
         LeftContainment = $(window).width() - $(".uslugi-home__slider").outerWidth();
         $(".uslugi-home__slider").draggable({  
@@ -305,7 +311,6 @@ $( document ).ready(function() {
         WindowWidth = $(window).width();      
         // $(".uslugi-home__header").animate({left: IndentPercent * WindowWidth}, 1000);
     });
-
     $(".slider__button_right").on('click',function(){
         $(".uslugi-home__slider").animate({left: SliderLeft}, 1000);
         if (WindowWidth < 577) {
@@ -319,12 +324,15 @@ $( document ).ready(function() {
         }, 1000);
     }); 
     $(".slider__button_left").on('click',function(){
-        $(".uslugi-home__slider").animate({left: -SliderIndent}, 1000);
         $(this).animate({opacity: "0"}, 500).fadeOut(500); // Исчезновение стрелки
         $(".uslugi-home__header").css('transition','0s').animate({opacity: "0", paddingLeft: "0"}, 400).fadeOut(400);
         if (WindowWidth < 577) {
             $(".uslugi-home__button").animate({bottom: "20px"}, 500);
-        } else {$(".uslugi-home__button").animate({bottom: "1.8vw"}, 500);}
+            $(".uslugi-home__slider").animate({left: "-70px"}, 1000);
+        } else {
+            $(".uslugi-home__slider").animate({left: -SliderIndent}, 1000);
+            $(".uslugi-home__button").animate({bottom: "1.8vw"}, 500);
+        }
         setTimeout(function () {
             flag = 1;
         }, 1000);

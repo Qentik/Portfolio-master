@@ -218,6 +218,7 @@ body
     grid-template-rows: 70px auto
     grid-template-columns: 8.2fr 4fr
     height: 100vh
+    height: calc(var(--vh, 1vh) * 100)
     min-height: 500px
     &-first
       display: grid
@@ -1121,7 +1122,15 @@ body
     height: 11vw
     bottom: -4vw
     left: -6vw
+  &__slider:active 
+    cursor: grabbing
+    cursor: -moz-grabbing
+    cursor: -webkit-grabbing
   &__slider
+    cursor: move /* fallback if grab cursor is unsupported */
+    cursor: grab
+    cursor: -moz-grab
+    cursor: -webkit-grab
     transition: 0s
     display: grid
     position: absolute
@@ -2416,6 +2425,13 @@ body
 
 @media (min-width: 1300px) 
   .main_wrapper
+    .wrap-contact_form
+      .contact_form 
+        form
+          .button-contact
+            button 
+              background: url(../img/5c96639bd45cf169ab7518de.png) no-repeat 1.8vw center
+              background-size: 1.7vw
     .header_bad
       ul 
         li 
