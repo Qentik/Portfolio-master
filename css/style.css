@@ -4415,6 +4415,7 @@ body {
     -webkit-text-fill-color: transparent;
   }
   .uslugi-home__wrapper {
+    width: auto;
     height: 400px;
   }
   .uslugi-home__button {
