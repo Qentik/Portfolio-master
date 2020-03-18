@@ -13,6 +13,11 @@
   src: url(../fonts/Roboto-Light.ttf) 
   font-weight: 300
   font-style: light
+@keyframes arrow_move2
+  50%
+    transform: translateX(-2vw) 
+  100%
+    transform: translateX(0)
 @keyframes arrow_move
   50%
     transform: translateY(-20px) 
@@ -136,81 +141,20 @@ body
   height: 3.7vw 
   width: 14vw
   font-size: 1.15vw
+
 .main_wrapper
   display: grid
   grid-template-columns: .9fr 8.17fr .9fr
   grid-template-rows: repeat(10, auto)
   background: #17171b
-  .header_bad
-    position: fixed
-    display: grid
-    grid-column: 1/4
-    height: 6vw
-    grid-template-columns: minmax(160px, auto) minmax(450px, 540px) 100px
-    width: 100%
-    z-index: 100000
+  &__header 
     background: transparent 
-    transition: 0.6s
-    .logo
-      display: grid 
-      grid-template-rows: 1fr
-      grid-template-columns: auto auto 1fr
-      margin-left: 50px
-      align-self: center
-      img 
-        height: 50px
-        align-self: center
-        margin-right: 10px
-      span
-        justify-self: start
-        display: inline-block
-        font-weight: 700
-        letter-spacing: 0.25em
-        font-size: 18px
-        background: linear-gradient(90deg, #46194d 1%, #d76611)  
-        -webkit-background-clip: text
-        -webkit-text-fill-color: transparent
-      span:nth-child(even)
-        letter-spacing: 0
-        margin-right: 7pxs
-    ul 
-      display: grid
-      grid-template-columns: repeat(6, auto)
-      justify-items: end
-      list-style-type: none
-      padding-left: 0
-      transition: 0.6s
-      li 
-        align-self: center
-        transition: 0.6s
-        a 
-          color: #ffffff
-          line-height: 1
-          font-family: 'Roboto'
-          font-weight: normal
-          transition: 0.6s
-        .color-black
-          color: black
-          font-weight: 700
-        a:after
-          display: block
-          content: ''
-          transform: scaleX(100%)
-          height: 2px
-          background: linear-gradient(90deg, #46194d 1%, #d76611)
-          transition: 0.5s 
-      li:hover 
-        cursor: pointer
-        a:after
-          transform-origin: center
-          transform: scaleX(0)
-          transition: 0.5s 
-    span 
-      align-self: center
-      justify-self: center
-      color: #ffffff
-      font-family: 'Roboto'
-      transition: 0.6s
+    position: fixed
+    top: 0
+    right: 0
+    left: 0
+    grid-column: 1/-1
+    grid-row: 1/2
   .perfomance_page
     display: grid
     grid-column: 2/3 
@@ -420,6 +364,8 @@ body
       .slider 
         margin: 0 2vw 0 0
         grid-column: 1/2
+        grid-template-rows: 1fr 
+        grid-template-columns: 1fr
         .fotorama 
           width: 100%
           height: auto
@@ -634,60 +580,13 @@ body
       .container 
         grid-column: 1/2
         position: relative
-        perspective: 5600px  
-        display: grid
-        align-items: center
-        justify-items: center
-        transform: translateX(4.5vw) translateY(-2vw) scale(1)
-        .cube
-          @include cube(-59px,59px,0)
-        .cube1
-          @include cube(-29px,0,0)
-        .cube2
-          @include cube(-59px,-149px,0)
-        .cube3
-          @include cube(0,59px,0px)
-        .cube4
-          @include cube(60px,0,-60px)
-        .cube5
-          @include cube(0px,-109px,0)
-        .cube6
-          @include cube(59px,59px,0)
-        .cube7
-          @include cube(119px,0,0px)
-        .cube8
-          @include cube(59px,-59px,0)
-        .cube9
-          @include cube(-58px,59px,60px)
-        .cube10
-          @include cube(-56px,57px,120px)
-        .cube11
-          @include cube(-89px,0,59px)
-        .cube12
-          @include cube(-108px,-1px,118px)
-        .cube13
-          @include cube(-59px,-109px,59px)
-        .cube14
-          @include cube(-79px,-59px,117px)
-        .cube15
-          @include cube(0,177px,59px)
-        .cube16
-          @include cube(1px,119px,118px)
-        .cube17
-          @include cube(119px,59px,60px)
-        .cube18
-          @include cube(56px,62px,114px)
-        .cube19
-          @include cube(0,0px,58px)
-          width: 70px
-          height: 70px
-          &-side 
-            &-front
-              transform: translateZ(35px)
-            &-right 
-              transform: rotateY(90deg) translateZ(35px)
-            &-top
-              transform: rotateX(90deg) translateZ(35px) 
+        // perspective: 5600px  
+        margin: 0
+        padding: 0
+        width: 100%
+        height: 100%
+        transform: translate(0,0) !important
+        justify-self: center  
   .wrap-contact_form
     position: relative
     display: grid
@@ -910,26 +809,32 @@ body
     height: 45px
   &__text
     justify-self: start
-    background: linear-gradient(to right, #290a59 0%, #ff7c00 100%);
-    -webkit-background-clip: text
-    -webkit-text-fill-color: transparent
-    font-family: Roboto
+    font-family: 'Roboto'
     font-size: 24px
     font-weight: 400
-  &__text_1
-  &__text_2
+    background: linear-gradient(to right, #290a59 0%, #ff7c00 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
 
 .header 
+  transition: .5s
+  top: 0
+  right: 0
+  left: 0
+  position: fixed 
   z-index: 1000
   display: grid
-  grid-template-columns: .3fr 2fr auto auto .3fr 
+  grid-template-columns: .3fr 1.5fr auto auto .3fr 
   padding: 1.2vw
   align-items: center
+  &__toggle
+    display: none
   &__tapper 
     display: none
     grid-column: 3/4
     grid-row: 1/2
   &__logo
+    z-index: 2
     grid-column: 2/3 
     display: grid
     align-items: center
@@ -953,38 +858,45 @@ body
     list-style: none
     grid-template-columns: repeat(5, auto)
   &__link:hover 
-    a:after
+    &:after
       transform-origin: center
       transform: scaleX(0)
       transition: 0.5s
   &__link
     transition: 1s
     margin: 0 .6vw
-    a 
-      color: black
-      font-weight: 700
-      font-size: 1.2vw
-      position: relative
-    a:after
+    color: black
+    font-weight: 700
+    font-size: 1.3vw
+    position: relative
+    &:after
       display: block
       content: ''
       transform: scaleX(100%)
       height: 2px
       background: linear-gradient(90deg, #46194d 1%, #d76611)
       transition: 0.5s 
+  &__link_white
+    color: #fff
+    font-weight: 400
   &__language
+    grid-row: 1/2
+    grid-column: 4/5
     margin-left: 15px
     justify-self: end
-    font-family: Roboto
+    font-family: 'Roboto'
     font-size: 1.2vw
     font-weight: 700
+  &__language_white 
+    color: #fff
 
 //             ------------------------------------------Страница УСЛУГИ---------------------------------------
 .main-uslugi 
-
   &__home 
     grid-column: 1/4
   &__header
+    top: -1px
+    left: -1px
     grid-column: 1/-1
     background: #ffffff
     box-shadow: 0px 21px 28px -4px rgba(0,0,0,.15)
@@ -1009,8 +921,31 @@ body
     background: #17171b
     
 .slider 
+  position: relative
   align-items: center 
-  grid-template-columns: 1fr repeat(4, auto) 1fr
+  display: grid
+  grid-template-columns: 2fr auto 1fr
+  &__blocks-wrapper
+    display: grid
+    grid-column: 2/3
+    grid-row: 1/2
+    grid-template-columns: repeat(4, auto)
+    padding: 10vw 0
+    width: 40vw
+    overflow: hidden
+  &__linear-gradient
+    transition: 1s
+    z-index: 2000
+    height: 35vw
+    width: 10vw
+    position: absolute
+    grid-column: 2/3
+  &__linear-gradient_left
+    background: linear-gradient(to right, rgba(23, 23, 27, 1) 0%, rgba(23, 23, 27, 0) 100%)
+    justify-self: start
+  &__linear-gradient_right
+    background: linear-gradient(to left, rgba(23, 23, 27, 1) 0%, rgba(23, 23, 27, 0) 100%)
+    justify-self: end
   &__button:before
     width: 2vw
     border-radius: 20%
@@ -1034,10 +969,15 @@ body
     display: grid
     justify-self: end
     margin-right: 1.5vw
+  &__button_left 
+    justify-self: end
+    transform: translateX(-1vw)
   &__button_right 
-    justify-self: start
+    justify-self: center
     transform: rotate(180deg)
   &__block
+    right: 0
+    transform: translateX(-8vw)
     justify-self: center
     position: relative
     z-index: 1000
@@ -1048,6 +988,8 @@ body
     overflow-y: scroll
     transition: 1s
     margin-right: 1.7vw
+  &__block_scaled
+    transform: translateX(-8vw) scale(1.1)
   &__img 
     padding-right: 5px
     width: calc(18vw - 8px)
@@ -1061,10 +1003,6 @@ body
   &__block::-webkit-scrollbar-track
     background-color: #32312e
     box-shadow: 0px 0px 3px #000 inset
-    transition: 1s
-  &__block:hover::-webkit-scrollbar
-    opacity: 1
-    display: block
     transition: 1s
   &__block::-webkit-scrollbar
     display: none
@@ -1080,8 +1018,9 @@ body
     transition: 1s
     width: 7px
     height: 0px
-  &__block_1
-    grid-column: 2/3
+  &__block_scaled::-webkit-scrollbar
+    display: block
+  &__block:nth-of-type(#{1})
     padding: 0
     overflow-y: hidden
     img 
@@ -1089,10 +1028,12 @@ body
 
 .uslugi-home
   position: relative
-  height: 40vw
+  height: 40vw 
+  &__arrow 
+    display: none
   &__button 
     z-index: 31
-    left: calc(15vw + 17vw/4)
+    left: 15vw
     bottom: 10vw
     display: grid
     align-items: center
@@ -1100,10 +1041,10 @@ body
     position: absolute
     background: linear-gradient(to right, #290a59 0%, #ff7c00 100%)
     color: #fff 
-    border-radius: 6px
-    font-size: 1.3vw
-    height: 3.5vw
-    width: 17vw
+    border-radius: 1vw
+    font-size: 1.4vw
+    height: 3.6vw
+    width: 18vw
     font-family: 'Roboto'
     font-weight: 700
   &__circle
@@ -1122,15 +1063,7 @@ body
     height: 11vw
     bottom: -4vw
     left: -6vw
-  &__slider:active 
-    cursor: grabbing
-    cursor: -moz-grabbing
-    cursor: -webkit-grabbing
   &__slider
-    cursor: move /* fallback if grab cursor is unsupported */
-    cursor: grab
-    cursor: -moz-grab
-    cursor: -webkit-grab
     transition: 0s
     display: grid
     position: absolute
@@ -1140,11 +1073,12 @@ body
     background: #17171b
     left: 370px
   &__wrapper 
+    margin-top: 70px
     position: relative
     height: 100%
-    width: 120vw
+    width: auto
   &__header 
-    top: 50%
+    top: 55%
     align-self: center
     transition: 1s
     position: absolute
@@ -1154,10 +1088,6 @@ body
     transform: translate(0,-100%)
     transform-origin: 0 0
     z-index: 50
-    background: -moz-linear-gradient(right, #000000 370px,#ffffff 370px) /* FF3.6+ */
-    background: -webkit-linear-gradient(right, #000000 370px,#ffffff 370px) /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(right, #000000 370px,#ffffff 370px) /* Opera 11.10+ */
-    background: -ms-linear-gradient(right, #000000 370px,#ffffff 370px) /* IE10+ */
     background: linear-gradient(to right, #000000 370px,#ffffff 370px) /* W3C */
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
@@ -1380,9 +1310,6 @@ body
     display: grid
     position: relative
     grid-template-columns: repeat(3,auto)
-    background: linear-gradient(to top, #b1dfff, #99cbef, #81b8df, #69a5cf, #5092c0)
-    -webkit-background-clip: text
-    -webkit-text-fill-color: transparent
     font-family: Roboto
     font-size: 1vw
     font-weight: 400
@@ -1393,6 +1320,9 @@ body
     font-size: 2vw
     font-weight: 700
     margin: 0px 20px
+    background: linear-gradient(to top, #b1dfff 0%, #99cbef 25%, #81b8df 50%, #69a5cf 75%, #5092c0 100%) /* W3C */
+    -webkit-background-clip: text
+    -webkit-text-fill-color: rgba(255,255,255,0)
   &__arrow:after
     content: ''
     height: inherit
@@ -1463,7 +1393,20 @@ body
     -webkit-text-fill-color: transparent
     font-weight: 700
     font-size: 1.5vw
+  &__logo-text
+    font-family: 'Roboto'
+    letter-spacing: 2px
+    grid-column: 2/3
+    align-self: center
+    font-size: 24px
+    font-weight: 700
+    background: linear-gradient(to right, #290a59 0%, #ff7c00 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
   &__logo
+    display: grid
+    grid-template-columns: 1f auto 
+    grid-template-rows: 1fr
     grid-column: 3/4
     grid-row: 1/3
     margin: 2.5vw 0vw 0vw 0vw
@@ -1472,15 +1415,6 @@ body
   &__img 
     width: 6.2vw 
     height: 5.5vw
-  &__logo-text_1 
-    font-size: 2vw
-    margin-left: .3vw 
-  &__logo-text_2
-    font-size: 2vw
-    margin-left: .6vw
-  &__logo-text
-    display: grid
-    grid-template-columns: auto 1fr
   &__text
     color: #ffffff
     font-family: Roboto
@@ -1497,6 +1431,11 @@ body
     justify-self: end
 
 // -------------------------------------------------------Контакты---------------------------------------------------------
+.main-contacts 
+  position: relative
+  overflow: hidden
+  &__header 
+    background-color: #fff
 .contacts-main
   display: grid
   justify-items: center 
@@ -1566,7 +1505,7 @@ body
     background: linear-gradient(10deg, #290a59 0%, #ff7c00 85%)
   &__block 
     width: 30vw
-    height: 40vw
+    height: 45vw
     padding: 4vw
     background: #17171b
     transform: translateY(-5vw)
@@ -1594,6 +1533,7 @@ body
     font-size: 1.4vw
     font-weight: 700
   &__number
+    text-decoration: none
     color: #adadad
     font-size: 1.1vw
     font-weight: 400
@@ -1610,6 +1550,13 @@ body
   display: grid
   grid-row-gap: 2vw
   transition: 1s
+  &__button 
+    border: none 
+    border-radius: .3vw
+    background: #f87803
+    font-size: 1.5vw
+    padding: .3em 0
+    color: #fff
   input:focus
     outline: none
     box-shadow: 0px 0px 5px 0px rgba(255,255,255,0.71)
@@ -1666,7 +1613,184 @@ body
   &__text_right
     grid-column: 3/4
     justify-self: end
+.dark-wrapper 
+  transition: .5s, height 0s
+  background: rgba(0,0,0,.4)
+  position: fixed
+  height: 0
+  width: 100vw
+  z-index: 200001
+  transform-origin: top right
+  &_contacts 
+    margin-top: 60px
+  &_uslugi 
+    margin-top: 60px
 
+//   ----------------------------------------------------------- About Us -------------------------------------------------------------------------
+.main-about
+  &__header
+    background: #fff
+  &__potential
+    margin-top: 60px
+  &__gallery
+  &__what
+  &__logo
+    z-index: -1
+  &__footer
+    z-index: 20
+  
+.about-footer
+  background: #17171b
+  display: grid
+  grid-template-columns: .9fr 4.085fr 4.085fr .9fr 
+  grid-template-rows: 1fr
+  &__text
+    display: inline-block
+    font-size: .9vw 
+    font-weight: 400
+    margin: 2vw 0 1vw 0
+    color: #fff
+  &__text_left
+    grid-row: 1/2
+    grid-column: 2/3
+  &__text_right
+    grid-column: 3/4
+    text-align: right
+
+.about-logo
+  position: relative
+  display: grid
+  padding: 5vw 0
+  &__img
+    align-self: center
+    justify-self: center
+    height: 9vw
+    width: auto
+  &__circle
+    position: absolute
+    width: 6vw 
+    height: 6vw
+    background: linear-gradient(-60deg, #290a59 0%, #ff7c00 100%);
+    border-radius: 50%
+    left: -3vw
+    bottom: -3vw
+    
+.about-what
+  position: relative
+  display: grid
+  grid-template-columns: .9fr 4.085fr 4.085fr .9fr 
+  grid-template-rows: auto auto
+  &__circle
+    position: absolute
+    width: 6vw 
+    height: 6vw
+    background: linear-gradient(-60deg, #290a59 0%, #ff7c00 100%);
+    border-radius: 50%
+    right: -3vw
+    top: 7vw
+  &__header
+    justify-self: center
+    margin: 5vw 0
+    grid-column: 2/4
+    grid-row: 1/2
+    font-weight: 300
+    font-size: 2.8vw
+  &__images
+    height: 25vw
+    position: relative
+    grid-row: 2/3
+    grid-column: 2/3
+  &__img:nth-of-type(#{1})
+    width: 70%
+    z-index: 2
+    right: 2vw
+    top: 4vw
+  &__img:nth-of-type(#{2})
+    width: 40%
+  &__img
+    position: absolute
+  &__wrapper
+    grid-row: 2/3
+    grid-column: 3/4
+  &__text
+    font-size: 1.3vw
+    font-weight: 400
+    color: #969696
+    margin-top: 1.4vw
+
+.about-gallery
+  padding: 7vw 0
+  background: linear-gradient(0deg, #fff 65%, #17171b 65%)
+  display: grid
+  grid-template-columns: .9fr 2.72fr 2.72fr 2.72fr .9fr
+  grid-template-rows: repeat(3, auto)
+  align-items: center
+  &__name 
+    margin-top: 2vw
+    font-size: 1.5vw
+  &__info
+    margin-top: .5vw
+    font-family: "Roboto" , sans-serif
+    font-weight: 400
+    font-size: 1.4vw
+  &__img 
+    height: 17vw 
+    width: auto
+    transform: translate(-.5vw,0)
+  &__wrapper
+    display: grid
+    grid-template-rows: repeat(3,auto)
+  &__wrapper:nth-of-type(#{1})
+    grid-column: 2/3
+    justify-self: start
+  &__wrapper:nth-of-type(#{2})
+    grid-column: 3/4
+    justify-self: center
+  &__wrapper:nth-of-type(#{3})
+    grid-column: 4/5
+    justify-self: end
+
+.potential 
+  position: relative
+  display: grid
+  grid-template-columns: .9fr 4.085fr 4.085fr .9fr
+  justify-items: center
+  align-items: center
+  background: #17171b
+  text-align: center
+  &__header
+    grid-column: 2/4
+    padding: 3em 0 2em 0
+    font-size: 2.5vw
+    color: #fff
+    font-weight: 300
+  &__text
+    grid-column: 2/4
+    text-align: left
+    color: #969696
+    font-weight: 400
+    font-size: 1.3vw
+    margin: 0 5em 1.5em 4em
+    justify-self: start
+  &__circle
+    position: absolute
+    border-radius: 50%
+    background: linear-gradient(-60deg, #290a59 0%, #ff7c00 100%)
+  &__circle_1
+    height: 5vw
+    width: 5vw
+    left: .2vw
+    top: 3.5vw
+  &__circle_2
+    width: 10vw
+    height: 10vw
+    right: -6vw
+    bottom: -2vw
+  &__circle_3
+    width: 4vw
+    height: 4vw
+    right: -1vw
+    bottom: -3vw
 
 @media (max-width: 992px)
   .main_wrapper
@@ -1715,135 +1839,16 @@ body
       &-first
         h1 
           font-size: 2.7vw
-    .header_bad
-      height: auto
-      grid-template-columns: auto 1fr
-      .logo 
-        margin: 3vw 0 3vw 5vw
-        img
-          height: 6vw
-      span 
-        display: none
-      .headers:before
-        transition: 1s
-        height: inherit
-        width: inherit
-        content: '' 
-        display: block
-        position: absolute
-        background: linear-gradient(90deg, #46194d 1%, #d76611)
-        transform: translateY(1.9vw)
-        border-radius: inherit
-      .headers:after
-        transition: 1s
-        height: inherit
-        width: inherit
-        content: '' 
-        display: block
-        position: absolute
-        background: linear-gradient(90deg, #46194d 1%, #d76611)
-        transform: translateY(-1.9vw)
-        border-radius: inherit
-      .headers 
-        cursor: pointer
-        transition: 1s
-        margin-right: 7vw
-        align-self: center
-        justify-self: end
-        position: relative
-        transition: 1s
-        &__hamburger:after
-          transition: 1s
-          height: inherit
-          width: inherit
-          content: '' 
-          display: block
-          position: absolute
-          background: linear-gradient(90deg, #46194d 20%, #d76611)
-          transform: translateY(1.4vw)
-          border-radius: inherit
-        &__hamburger:before
-          transition: 1s
-          height: inherit
-          width: inherit
-          content: '' 
-          display: block
-          position: absolute
-          background: linear-gradient(90deg, #46194d 1%, #d76611)
-          transform: translateY(-1.4vw)
-          border-radius: inherit
-        &__hamburger
-          z-index: 20000
-          display: block
-          align-self: center
-          transition: .5s
-          height: 4px
-          width: 5vw
-          background: linear-gradient(90deg, #46194d 8%, #d76611)
-          position: relative
-          border-radius: 15px
-        &__hamburger_active
-          height: 0
-          display: block 
-        &__hamburger_active:after   
-          height: 3px
-          background: #d76611
-          transform: rotate(-45deg)
-        &__hamburger_active:before  
-          height: 3px
-          background: #d76611
-          transform: rotate(45deg)  
-        &__link
-          display: grid
-          align-items: center 
-          justify-items: center
-          position: absolute
-          align-self: center
-          opacity: 0
-          width: 0
-          height: 0
-          background: linear-gradient(30deg, #46194d 1%, #d76611)
-          justify-items: center
-          transition-timing-function: cubic-bezier(0.935, 0.000, 0.340, 1.330)
-          @for $i from 1 through 5 
-            &:nth-of-type(#{$i})
-              transform: rotate(0deg) translateX(0) rotate(0deg) 
-              transition-duration: 380ms+(80ms*($i))
-          a 
-            font-weight: 400
-            transition: .3s
-            text-align: center
-            font-family: 'Roboto'
-            line-height: 1.3
-            letter-spacing: .5px
-            font-size: 0
-            text-transform: uppercase
-          a:after 
-            display: none
-        &__link_active  
-          $rot: 2
-          @for $i from 1 through 5 
-            &:nth-of-type(#{$i})
-              transform: rotate(180deg + $rot) translateX(75px) rotate(-180deg - $rot) 
-              transition-duration: 580ms+(80ms*($i))
-            $rot: ($rot - 29)
-          opacity: 1
-          width: 50px
-          height: 50px 
-          border-radius: 50%
-          a 
-            font-size: 11vw
-
 
 @media (max-width: 768px)
+  .slider 
+    &__block::-webkit-scrollbar
+      display: block
   .button 
     font-size: 1.5vw 
     height: 4vw
     width: 18vw
   .main_wrapper
-    .header_bad
-      .headers
-        transform: scale(.8)
     .perfomance_page 
       &-first
         a:nth-child(3)
@@ -1856,6 +1861,167 @@ body
           transform: scale(.65) translate(7vw, -2vw)
 
 @media (max-width: 576px)
+  .potential 
+    grid-template-columns: 3vw 1fr 1fr 3vw
+    padding-bottom: 15vw
+    &__header
+      font-size: 23px
+      margin: 0
+      padding: 15vw 0 10vw 0
+    &__text 
+      font-size: 13px
+      margin: 3vw 2vw
+    &__circle_1
+      width: 12vw
+      height: 12vw
+      left: -5vw
+      top: 5vw
+    &__circle_2
+      width: 14vw
+      height: 14vw
+    &__circle_3
+      width: 6vw
+      height: 6vw
+      bottom: -5vw
+  .about-gallery
+    background: #fff
+    grid-template-columns: 1fr
+    &__info
+      font-size: 13px  
+      margin-top: 1vw
+    &__name  
+      font-size: 15px
+    &__wrapper
+      justify-items: center
+      margin-bottom: 10vw
+    &__img 
+      height: auto
+      width: 80%
+    &__wrapper:nth-of-type(#{1})
+      justify-self: center
+      grid-column: 1/2
+      grid-row: 1/2
+    &__wrapper:nth-of-type(#{2})
+      justify-self: center
+      grid-column: 1/2
+      grid-row: 2/3
+    &__wrapper:nth-of-type(#{3})
+      justify-self: center
+      grid-column: 1/2
+      grid-row: 3/4
+  .about-what 
+    grid-template-columns: 3vw 1fr 3vw
+    grid-template-rows: repeat(3, auto)
+    &__circle 
+      top: -4vw
+      right: -9vw
+      width: 15vw
+      height: 15vw
+    &__header
+      font-size: 23px
+    &__images
+      grid-column: 2/3
+      grid-row: 3/4
+      height: 45vw
+      margin-top: 30px
+    &__wrapper
+      grid-column: 2/3
+      grid-row: 2/3
+    &__text 
+      font-size: 13px
+      margin-top: 5vw
+      margin: 5vw 2vw 0 2vw
+  .about-footer 
+    grid-template-columns: 3vw auto auto 3vw
+    padding: 1.5vw 0
+    margin: 0
+    &__text_left
+    &__text 
+      font-size: 8px
+  .contacts-footer 
+    &__text 
+      font-size: 8px
+  .contacts-form 
+    textarea
+      padding: 1.6vw 1.9vw
+      border-radius: .5vw
+      font-size: 2.5vw 
+    textarea:focus 
+      box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.71)
+    input:focus
+      outline: none
+      box-shadow: 0px 0px 5px 0px rgba(100,100,100,0.71)
+    input 
+      padding: 1.6vw 1.9vw
+      font-size: 2.5vw
+      border-radius: .5vw
+    &__button
+      margin-top: 3vw
+      border-radius: 1vw
+      font-size: 3.5vw
+    &__header 
+      letter-spacing: .2vw
+      font-size: 5vw
+      text-align: center
+      margin: 3vw 0 0 0 
+      height: 15vw
+  .contacts-block
+    &__header
+      letter-spacing: .2vw
+      margin: 3vw 0 0 0 
+      height: 15vw
+      font-size: 5vw
+    &__tel 
+      font-size: 4vw
+      margin-top: 1vw
+      margin-bottom: 1vw
+    &__number
+      font-size: 3vw
+    &__email 
+      font-size: 4vw 
+      margin-bottom: 1vw
+    &__pochta 
+      font-size: 3vw
+  .contacts-main 
+    height: 85vw
+    &__header 
+      width: 80vw
+      font-size: 6vw
+      letter-spacing: .03em
+      line-height: 1.5em
+      text-align: center
+      font-weight: 400
+  .contacts-forms 
+    grid-template-columns: 3vw 1fr 1fr 3vw
+    &__img 
+      width: 23vw
+      height: 18vw
+    &__logo-text 
+      font-size: 8vw
+    &__circle1 
+      width: 30vw
+      height: 30vw
+      left: 1vw
+    &__circle2
+      width: 30vw
+      height: 15vw
+    &__circle3
+      width: 15vw
+      height: 15vw
+      bottom: 7vw
+    &__circle4
+      width: 20vw
+      height: 40vw
+      right: -17vw
+      top: 20vw
+    &__circle5 
+      width: 10vw
+      height: 10vw
+    &__block 
+      border-radius: 1vw
+      width: 43vw
+      height: 100vw
+      transform: translate(0,-8vw)
   .uslugi-footer 
     grid-template-columns: 5vw 1fr 1fr 5vw
     padding-top: 5px
@@ -1868,10 +2034,6 @@ body
       font-size: 8px
     &__mail 
       font-size: 9px
-    &__logo-text_2
-      font-size: 14px
-    &__logo-text_1
-      font-size: 14px
     &__img
       margin-right: 1.5vw
       width: 9vw
@@ -1946,7 +2108,7 @@ body
       border-radius: 20px
       opacity: 0
       color: #fff
-      padding: 6px 10px
+      padding: .8em 1.2em
       text-align: center
       margin: 0
       justify-self: center 
@@ -1983,7 +2145,22 @@ body
     &__monitor 
       display: none 
   .slider 
-    grid-template-columns: 100px repeat(4, auto) 100px
+    grid-template-columns: 1fr auto 1fr
+    &__linear-gradient
+      width: 10vw
+      height: 95vw
+      transform: translateY(6vw)
+    &__linear-gradient_left
+      transform: translateX(-1vw)
+      background: linear-gradient(to right, rgba(23, 23, 27, 1) 0%, rgba(23, 23, 27, 0) 100%)
+    &__linear-gradient_right
+      transform: translateX(1vw)
+      background: linear-gradient(to left, rgba(23, 23, 27, 1) 0%, rgba(23, 23, 27, 0) 100%)
+    &__blocks-wrapper
+      height: 90vw
+      width: 65vw
+    &__block::-webkit-scrollbar
+      display: block
     &__button:after
       width: 20px
       border-radius: 10px
@@ -1995,22 +2172,72 @@ body
       height: 4px
       transform: translateY(-4px) rotate(-45deg)
     &__button 
-      margin-right: 12px
+      margin: 0 3vw 0 5vw
+      transform: translateY(8vw)
+    &__button_left 
+      justify-self: start
+      height: 0
+      opacity: 0
+    &__button_right 
+      transform: translateY(8vw) rotate(180deg)
     &__block 
-      height: 70%
-      width: 200px
-    &__img
-      width: calc(200px - 8px)
-    &__block_1 
+      top: 5vw
+      height: auto
+      width: 50vw
+      transform: translateX(-49vw)
+      margin-right: 8vw
+    &__block_scaled 
+      transform: translateX(-50vw) scale(1.1)
+    &__block:nth-of-type(#{1})
       img 
-        width: 200px
+        width: 50vw
+    &__img
+      width: 100%
+
   .uslugi-home
-    height: 400px
+    height: 140vw
+    &__arrows:before
+      position: absolute
+      transform: translateY(1.2vw) translateX(-.3vw) rotate(45deg)
+      content: ''
+      display: block
+      background: black 
+      width: 4vw 
+      border-radius: 20%
+      height: 1vw
+    &__arrows:after
+      position: absolute
+      transform: translateY(-1.2vw) translateX(-.3vw) rotate(-45deg)
+      content: '' 
+      display: block
+      background: black 
+      width: 4vw 
+      border-radius: 20%
+      height: 1vw
+    &__arrows 
+      justify-items: center
+      align-items: center
+      display: grid
+      position: relative
+    &__arrow 
+      opacity: 1
+      cursor: pointer
+      animation: arrow_move2 1.5s infinite ease-in-out 
+      display: grid
+      position: absolute 
+      width: 12vw 
+      height: 12vw
+      border-radius: 100%
+      border: 3px solid black
+      top: 88vw
+      left: 30vw
     &__slider
       left: 60vw
     &__header
-      top: 220px
-      font-size: 7vw
+      opacity: 1
+      transform: translate(0,0)
+      top: 55vw
+      font-size: 7.2vw
       padding-left: 20px
       background: -moz-linear-gradient(right, #000000 60vw,#ffffff 60vw) /* FF3.6+ */ 
       background: -webkit-linear-gradient(right, #000000 60vw,#ffffff 60vw) /* Chrome10+,Safari5.1+ */ 
@@ -2020,13 +2247,13 @@ body
       -webkit-background-clip: text
       -webkit-text-fill-color: transparent
     &__wrapper 
-      width: auto
-      height: 400px
+      margin: 0
     &__button 
-      width: 130px
-      height: 25px
-      font-size: 11px
-      bottom: 110px
+      bottom: 4vw
+      width: 45vw
+      height: 10vw
+      font-size: 3.8vw
+      border-radius: 3vw
       left: 17vw
     &__circle_medium
       width: 18vw
@@ -2036,146 +2263,158 @@ body
       width: 9vw
       height: 9vw
   .header 
+    transition: .5s 
+    overflow: hidden
     height: 60px
-    grid-template-columns: 15px 2fr auto 15px
+    grid-template-columns: 15px auto 1fr 15px
+    &__logo 
+      align-self: start
+      margin-top: 15px
     &__img 
       width: 30px
       height: 25px
     &__text 
       font-size: 16px
-    &__tapper // Верхний слой кнопки-бургер
-      display: block
-      width: 100%
-      height: 15px
+    &__button-toggle 
+      border: none
+      display: inline-block
+      background-color: transparent 
+      position: relative
+      padding: 13px 20px
+      justify-self: end
       align-self: center
       cursor: pointer
+      transition: .7s 
+      border-radius: 100% 
+      &:before,&:after 
+        content: '' 
+        position: absolute
+        display: block
+        left: 0px
+        width: 20px
+        height: 3px
+        background: linear-gradient(90deg, #46194d 1%, #d76611) 
+        border-radius: 20%
+        transition: .5s
+      &:before
+        transform: rotate(45deg) scale(0)
+      &:after 
+        transform: rotate(-45deg) scale(0)      
+    &__toggle:checked 
+      & ~ .header__links 
+        margin-right: 40px
+        margin-top: 40px
+        pointer-events: auto
+        .header__link 
+          background: linear-gradient(90deg, #46194d 1%, #d76611)  
+          -webkit-background-clip: text
+          -webkit-text-fill-color: transparent
+          letter-spacing: 0
+          height: 40px
+          line-height: 40px
+          margin-top: 0
+          opacity: 1
+          transform: scaleY(1)
+          transition: .5s, opacity 1s
+          font-weight: 700
+          &:before 
+              opacity: 0
+      & ~ .header__toggle-container 
+        position: relative
+        height: 200px
+        .header__button-toggle:focus
+        //   box-shadow: 0 0 0 10px rgba(255, 255, 255, 1), inset 0 0 0 20px rgba(255, 255, 255, 1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(255, 255, 255, 1) 
+        .header__button-toggle
+          background: #fff
+          position: absolute
+          box-shadow: 0 0 0 500px rgba(255, 255, 255, 1)
+          padding: 10px
+          right: 1px
+          top: -1px
+          transition: background-color 0s
+          &:before
+            transform: rotate(45deg) scale(1)
+          &:after 
+            transform: rotate(-45deg) scale(1)
+    &__toggle 
+      position: absolute
+      opacity: 1
+      transform: translate(100px,-100px)
+    &__toggle-container 
+      margin: 15px 2px 0 0
+      justify-self: end
+      display: grid
+      position: relative
+      transition: .5s
       grid-column: 3/4
-      z-index: 2
-    &__links:before
-      transition: 1s
-      content: ''
-      display: block 
-      background: inherit
-      width: inherit 
-      height: 4px
-      border-radius: inherit
-      position: absolute
-      transform: translateY(-7px)
-    &__links:after
-      transition: 1s
-      position: absolute
-      content: '' 
-      display: block 
-      background: inherit
-      width: inherit 
-      height: 4px
-      border-radius: inherit
-      transform: translateY(7px)
+      align-self: start 
     &__links 
+      margin: 15px 0 0 0
+      align-self: start 
+      grid-column: 3/4
+      justify-self: end
       cursor: pointer
       transition: .5s
-      position: relative
-      justify-items: center 
-      align-items: center 
-      height: 4px
-      background: linear-gradient(90deg, #46194d 20%, #d76611)
-      width: 25px 
-      padding: 0
-      border-radius: 10px
-      margin-right: 10px
-    &__links_active
-      height: 0px
-    &__links_active:before
-      transform: rotate(45deg) 
-    &__links_active:after 
-      transform: rotate(-45deg)
-    &__link
-      justify-self: end
       position: absolute
-      display: grid
-      justify-items: center
-      align-items: center
-      transition-timing-function: cubic-bezier(0.935, 0.000, 0.340, 1.330)
-      border-radius: 50%
-      background: linear-gradient(240deg, #46194d, #d46512 75%)
-      transition: 1s
-      height: 0
-      width: 0
-      transition-timing-function: cubic-bezier(0.935, 0.000, 0.340, 1.330)
+      display: grid 
+      grid-template-rows: repeat(5, auto)
+      grid-template-columns: 1fr
+      pointer-events: none 
+      justify-items: end
+    &__link:hover 
+      cursor: pointer
+    &__link
+      $delay: 0
       @for $i from 1 through 5 
-        &:nth-of-type(#{$i})
-          transform: rotate(0deg) translateX(0) rotate(0deg) 
-          transition-duration: 380ms+(80ms*($i))
-      a
-        text-align: center
-        transition: 1s
-        font-size: 0
-        color: #fff
-      a:after 
-        display: none
-    &__link_active
-      $rot: 2
-      @for $i from 1 through 5 
-        &:nth-of-type(#{$i})
-          transform: rotate(180deg + $rot) translateX(75px) rotate(-180deg - $rot) 
-          transition-duration: 580ms+(80ms*($i))
-        $rot: ($rot - 29)
-      width: 50px
-      height: 50px 
-      a  
+        &:nth-child(#{$i})
+          $delay: ($i - 1) * .05s
+          transition-delay: $delay
+        &:before 
+          transition-delay: $delay 
+      position: relative
+      display: inline-block
+      font-size: 15px 
+      letter-spacing: -7.2px 
+      height: 7px 
+      line-height: 7px 
+      text-transform: uppercase
+      white-space: nowrap
+      transition: .5s, opacity 1s
+      transform: scaleY(0.2)
+      border: none
+      color: transparent 
+      &:nth-child(1)
+        letter-spacing: -7px 
+      &:nth-child(2)
+        letter-spacing: -7px 
+      &:nth-child(n + 4)
+        letter-spacing: -8px 
+        margin-top: -7px
+        opacity: 0
+      &:before
         position: absolute
-        align-self: center 
-        justify-self: center
-        text-align: center
-        font-size: 9px
+        content: ''
+        top: 50%
+        right: 0
+        width: 100%
+        height: 3px 
+        transform: translateY(-50%) scaleY(6)
+        background: linear-gradient(90deg, #46194d 1%, #d76611)
+        transition: .5s
+      &:after 
+        display: none
     &__language 
       display: none
   .main-uslugi
     display: grid
     grid-template-columns: 5vw 90vw 5vw
+    overflow: hidden
+    position: relative
   .button 
     font-size: 3.4vw
     height: 9.5vw
     width: 40vw
   .main_wrapper 
-    .header_bad 
-      height: 65px
-      .logo 
-        span 
-          margin-right: 5px
-          font-size: 20px
-          letter-spacing: 3px
-        img 
-          width: 35px
-          height: 30px
-          margin-right: 5px
-      .headers
-        &__link_active
-          $rot: 5
-          @for $i from 1 through 5 
-            &:nth-of-type(#{$i})
-              transform: rotate(180deg + $rot) translateX(95px) rotate(-180deg - $rot) 
-              transition-duration: 580ms+(80ms*($i))
-            $rot: ($rot - 29)
-          width: 4em  
-          height: 4em 
-        &__link
-          cursor: pointer
-          a 
-            font-size: 9px
-        &__hamburger:before
-          transform: translateY(10px)
-        &__hamburger:after
-          transform: translateY(-10px)
-        &__hamburger
-          height: 4px
-          width: 35px
-        &__hamburger_active
-          height: 0
-        &__hamburger_active:after
-          transform: rotate(45deg)
-        &__hamburger_active:before
-          transform: rotate(-45deg)
     .perfomance_page
       grid-template-columns: auto
       &-first
@@ -2401,13 +2640,6 @@ body
             button 
               background: url(../img/5c96639bd45cf169ab7518de.png) no-repeat 2.5vw center
               background-size: 1.7vw
-    .header_bad 
-      ul 
-        li  
-          a
-            font-size: .9rem
-      span 
-        font-size: .9rem
         
 @media (min-width: 1100px) 
   .header 
@@ -2433,13 +2665,6 @@ body
             button 
               background: url(../img/5c96639bd45cf169ab7518de.png) no-repeat 1.8vw center
               background-size: 1.7vw
-    .header_bad
-      ul 
-        li 
-          a 
-            font-size: 1rem
-      span 
-        font-size: 1rem
 @media (min-width: 1600px) 
   .uslugi-home
     &__button 
@@ -2503,19 +2728,6 @@ body
           .about_us-text 
             p 
               line-height: 1.8
-    .header_bad
-      grid-template-columns: minmax(160px, auto) minmax(450px, 540px) 200px
-      ul 
-        li 
-          a 
-            font-size: 1.1rem
-      span 
-        font-size: 1.1rem
-      .language 
-        justify-self: start
-        margin-left: 30px
-      .logo 
-        padding-left: 100px
   .button
     font-size: 1.15rem
     height: 3.5rem 
@@ -2539,14 +2751,6 @@ body
     height: 4.2rem 
     width: 16rem
   .main_wrapper
-    .header_bad
-      ul 
-        li 
-          a
-            font-size: 1.2rem
-      span 
-        font-size: 1.2rem
-
         
 
 
